@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color:darkslategrey;
+}
+
+.game{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width: 50%;
+    margin: 5% auto;
+    background-color:dimgray;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: inherit;
+}
+
+.player-choice-img, .bot-choice-img{
+    width: 80px;
+    border-radius: 10%;
+    border: none;
+}
+
+.replay{
+    display: flex;
+    justify-content: space-around;
+}
+
+.text-center{
+    text-align: center;
+}
+.result-container{
+    text-align: center;
+    padding: 10px;
+}
+
+.player-result, .bot-result{
+    height: 64px;
+    width: 80px;
+    margin-top: 5px;
+}
+.grow-1{
+    flex-grow: 1;
+}
+
+.grow-2{
+    flex-grow: 2;
+}
