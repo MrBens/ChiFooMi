@@ -56,3 +56,15 @@ body{
 .grow-2{
     flex-grow: 2;
 }
+
+.selected, .win{
+    background-color: green;
+}
+
+.draw{
+    background-color: yellow;    
+}
+
+.loose{
+    background-color: red;
+}
