@@ -1,57 +1,25 @@
 const botResult = document.querySelector('.bot-result'), playerResult = document.querySelector('.player-result');
 const score = document.querySelector('.scoreG'), msg = document.querySelector('.msg');
 const playerChoices = document.querySelectorAll('.player-choice-img'), botChoices = document.querySelectorAll('.bot-choice-img');
-var botValue = 0, playerScore = 0, botScore = 0, result = '';
+var playerScore = 0, botScore = 0;
 
-let DrawImage = (botChoice, playerChoice) => {
-    botResult.innerHTML = `<img class="bot-choice-img" src="assets/img/${botChoice}.png" alt="${botChoice}">`
-    playerResult.innerHTML = `<img class="player-choice-img" src="assets/img/${playerChoice}.png" alt="${playerChoice}">`
-}
+playerChoices.forEach(choice => choice.addEventListener('click', Play));
 
-let PrintResult = result => {
-    msg.removeAttribute('class')
-    if (result == 'draw') {
-        msg.classList.add(result)
-        msg.innerHTML = 'égalité !';
-    } else if (result == 'win') {
-        msg.classList.add(result)
-        msg.innerHTML = 'Vous avez gagné !';
-        playerScore++;
+function Play() {
+    let choicesArray = Array.from(playerChoices) , botValue = playerChoices[Math.floor(Math.random() * playerChoices.length)];
+    let botChoice = choicesArray.indexOf(botValue);
+    this.value = choicesArray.indexOf(this);
+    playerChoices.forEach(choice => choice.classList.remove('selected')), botChoices.forEach(choice => choice.classList.remove('selected'));
+    msg.removeAttribute('class'), this.classList.add('selected'), botChoices[botChoice].classList.add('selected');
+
+    if (botChoice == this.value) {
+        msg.classList.add('draw'), msg.innerHTML = 'égalité !';
+    } else if (botChoice == this.value - 1 || botChoice == this.value + 2) {
+        msg.classList.add('win'), msg.innerHTML = 'Vous avez gagné !', playerScore++;
     } else {
-        msg.classList.add(result)
-        msg.innerHTML = 'Vous avez perdu !';
-        botScore++;
+        msg.classList.add('loose'), msg.innerHTML = 'Vous avez perdu !', botScore++;
     }
     score.innerHTML = `${playerScore} : ${botScore}`;
-}
-
-let CheckRules = (botChoice, playerChoice) => {
-    if (botChoice == playerChoice) {
-        result = 'draw';
-    } else if (botChoice == playerChoice - 1 || botChoice == playerChoice+2) {
-        result = 'win';
-    } else {
-        result = 'loose';
-    }
-    PrintResult(result)
-}   
-
-document.addEventListener('click', e => {
-    if (e.target.classList.contains('player-choice-img')) {
-        Play(e.target);
-    }
-})
-
-let Play = target => {
-    botValue = Math.floor(Math.random() * 3);
-    for (let i = 0; i < playerChoices.length; i++) {
-        playerChoices[i].classList.remove('selected');
-        botChoices[i].classList.remove('selected');
-        if (target == playerChoices[i]) {
-            target.classList.add('selected');
-            CheckRules(botValue, i);
-            DrawImage(botChoices[botValue].getAttribute('alt'), target.getAttribute('alt'));
-        }
-    }
-    botChoices[botValue].classList.add('selected');
+    botResult.innerHTML = `<img src="${botValue.src}" alt="${botValue.alt}">`
+    playerResult.innerHTML = `<img src="${this.src}" alt="${this.alt}">`
 }

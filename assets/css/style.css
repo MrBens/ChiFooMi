@@ -8,6 +8,12 @@ body{
     background-color:darkslategrey;
 }
 
+img{
+    width: 80px;
+    border-radius: 10%;
+    border: none;
+}
+
 .game{
     display: flex;
     align-items: center;
@@ -23,12 +29,6 @@ body{
     flex-direction: column;
     justify-content: space-between;
     height: inherit;
-}
-
-.player-choice-img, .bot-choice-img{
-    width: 80px;
-    border-radius: 10%;
-    border: none;
 }
 
 .replay{
